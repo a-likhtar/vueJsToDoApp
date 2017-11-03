@@ -37,11 +37,8 @@ export default {
     };
   },
   methods: {
-    addTodo(title) {
-      this.todos.push({
-        title,
-        done: false,
-      });
+    addTodo(newTodo) {
+      this.todos.push(newTodo);
     },
   },
 };
