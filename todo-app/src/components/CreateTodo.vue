@@ -7,12 +7,12 @@
       <div class='content'>
         <div class='ui form'>
           <div class='field'>
-            <label>Title</label>
-            <input v-model="titleText" type='text' ref='title' defaultValue="">
+            <label>Id</label>
+            <input v-model="idText" type='text' ref='title' defaultValue="">
           </div>
           <div class='field'>
-            <label>Project</label>
-            <input v-model="projectText" type='text' ref='project' defaultValue="">
+            <label>Title</label>
+            <input v-model="titleText" type='text' ref='project' defaultValue="">
           </div>
           <div class='ui two button attached buttons'>
             <button class='ui basic blue button' v-on:click="sendForm()">
@@ -32,8 +32,8 @@
 export default {
   data() {
     return {
+      idText: 1,
       titleText: '',
-      projectText: '',
       isCreating: false,
     };
   },
@@ -45,15 +45,15 @@ export default {
       this.isCreating = false;
     },
     sendForm() {
-      if (this.titleText.length > 0 && this.projectText.length > 0) {
+      if (this.idText > 0 && this.titleText.length > 0) {
+        const id = Number(this.idText);
         const title = this.titleText;
-        const project = this.projectText;
         this.$emit('add-todo', {
+          id,
           title,
-          project,
-          done: false,
+          completed: false,
         });
-        this.projectText = '';
+        this.idText = '';
         this.titleText = '';
       }
       this.isCreating = false;
