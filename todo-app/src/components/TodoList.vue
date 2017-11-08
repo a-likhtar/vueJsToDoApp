@@ -1,20 +1,29 @@
 <template>
   <div>
-    <p>Completed Tasks: {{todos.filter(todo => {return todo.completed === true}).length}}</p>
+    <!-- <p>Completed Tasks: {{todos.filter(todo => {return todo.completed === true}).length}}</p>
     <p>Pending Tasks: {{todos.filter(todo => {return todo.completed === false}).length}}</p>
-    <todo  v-on:delete-todo="deleteTodo" v-on:complete-todo="completeTodo" v-for="(todo, index) in todos"  :key="index" v-bind:todo="todo"></todo>
+    <todo  v-on:delete-todo="deleteTodo" v-on:complete-todo="completeTodo" v-for="(todo, index) in todos"  :key="index" v-bind:todo="todo"></todo> -->
+  <ul>
+    <li v-for="(todo, index) in todos" :key="index">
+      {{todo.id}} - {{todo.title}}
+    </li>
+  </ul>
+    Hello
   </div>
 </template>
 
 <script type = "text/javascript" >
+import { mapGetters, mapActions } from 'vuex';
 import axios from 'axios';
-import Todo from './Todo';
+// import Todo from './Todo';
 
 export default {
-  props: ['todos'],
-  components: {
-    Todo,
-  },
+  computed: mapGetters({
+    todos: 'allTodos',
+  }),
+  // components: {
+  //   Todo,
+  // },
   methods: {
     deleteTodo(todo) {
       const todoIndex = this.todos.indexOf(todo);
@@ -37,6 +46,9 @@ export default {
               console.log(e);
             });
     },
+  },
+  created() {
+    this.$store.dispatch('getAllTodos');
   },
 };
 </script>

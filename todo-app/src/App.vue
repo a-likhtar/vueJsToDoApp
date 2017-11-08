@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <todo-list v-bind:todos="todos"></todo-list>
-    <create-todo v-on:add-todo="addTodo"></create-todo>
+    <h1>List of all todos</h1>
+    <todo-list></todo-list>
+    <!-- <create-todo v-on:add-todo="addTodo"></create-todo> -->
   </div>
 </template>
 
@@ -16,32 +17,32 @@ export default {
     TodoList,
     CreateTodo,
   },
-  data() {
-    return {
-      todos: [],
-    };
-  },
-  created() {
-    axios.get('https://jsonplaceholder.typicode.com/todos')
-    .then(response => {
-      this.todos = response.data;
-    })
-    .catch(e => {
-      console.log(e);
-    });
-  },
-  methods: {
-    addTodo(newTodo) {
-      this.todos.push(newTodo);
-      axios.post('https://jsonplaceholder.typicode.com/todos', {
-        body: newTodo,
-      })
-      .then(response => {})
-      .catch(e => {
-        console.log(e);
-      });
-    },
-  },
+  // data() {
+  //   return {
+  //     todos: [],
+  //   };
+  // },
+  // created() {
+  //   axios.get('https://jsonplaceholder.typicode.com/todos')
+  //   .then(response => {
+  //     this.todos = response.data;
+  //   })
+  //   .catch(e => {
+  //     console.log(e);
+  //   });
+  // },
+  // methods: {
+  //   addTodo(newTodo) {
+  //     this.todos.push(newTodo);
+  //     axios.post('https://jsonplaceholder.typicode.com/todos', {
+  //       body: newTodo,
+  //     })
+  //     .then(response => {})
+  //     .catch(e => {
+  //       console.log(e);
+  //     });
+  //   },
+  // },
 };
 </script>
 
