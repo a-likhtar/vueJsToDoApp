@@ -43,25 +43,20 @@
 </template>
 
 <script type="text/javascript">
+  import { mapGetters, mapActions } from 'vuex';
+
   export default {
     props: ['todo'],
     data() {
-      return {
-        isEditing: false,
-      };
+      return { isEditing: false };
     },
     methods: {
+      ...mapActions(['deleteTodo', 'completeTodo']),
       showForm() {
         this.isEditing = true;
       },
       hideForm() {
         this.isEditing = false;
-      },
-      deleteTodo(todo) {
-        this.$emit('delete-todo', todo);
-      },
-      completeTodo(todo) {
-        this.$emit('complete-todo', todo);
       },
     },
   };

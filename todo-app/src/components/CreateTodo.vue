@@ -15,7 +15,7 @@
             <input v-model="titleText" type='text' ref='project' defaultValue="">
           </div>
           <div class='ui two button attached buttons'>
-            <button class='ui basic blue button' v-on:click="sendForm()">
+            <button class='ui basic blue button' v-on:click="sendForm">
               Create
             </button>
             <button class='ui basic red button' v-on:click="closeForm">
@@ -29,10 +29,11 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
-      idText: 1,
+      idText: '',
       titleText: '',
       isCreating: false,
     };
@@ -45,17 +46,9 @@ export default {
       this.isCreating = false;
     },
     sendForm() {
-      if (this.idText > 0 && this.titleText.length > 0) {
-        const id = Number(this.idText);
-        const title = this.titleText;
-        this.$emit('add-todo', {
-          id,
-          title,
-          completed: false,
-        });
-        this.idText = '';
-        this.titleText = '';
-      }
+      this.$store.dispatch('addTodo', { id: this.idText, title: this.titleText });
+      this.idText = '';
+      this.titleText = '';
       this.isCreating = false;
     },
   },

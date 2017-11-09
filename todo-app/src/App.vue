@@ -2,7 +2,7 @@
   <div id="app">
     <h1>List of all todos</h1>
     <todo-list></todo-list>
-    <!-- <create-todo v-on:add-todo="addTodo"></create-todo> -->
+    <create-todo></create-todo>
   </div>
 </template>
 
