@@ -10,19 +10,26 @@ const state = {
 
 const getters = {
   allTodos: (state) => state.todos,
-  getCompletedTodosCount: (state) => state.todos.filter(todo => todo.completed === true).length,
-  getPendingTodosCount: (state) => state.todos.filter(todo => todo.completed === false).length,
+  getCompletedTodosCount: (state) => state.todos.filter((todo) => todo.completed === true).length,
+  getPendingTodosCount: (state) => state.todos.filter((todo) => todo.completed === false).length,
 };
 
 const actions = {
   getAllTodos({ commit }) {
-    todosApi.getTodos().then(data => commit('getAllTodos', data));
+    todosApi.getTodos().then((data) => commit('getAllTodos', data));
   },
   showForm: ({ commit }, isEditing) => commit('showForm', isEditing),
   hideForm: ({ commit }, isEditing) => commit('hideForm', isEditing),
-  deleteTodo: ({ commit }, todo) => commit('deleteTodo', todo),
-  completeTodo: ({ commit }, todo) => commit('completeTodo', todo),
-  addTodo: ({ commit }, todo) => commit('addTodo', todo),
+  deleteTodo({ commit }, todo) {
+    todosApi.deleteTodo(todo.id).then(commit('deleteTodo', todo));
+  },
+  completeTodo({ commit }, todo) {
+    commit('completeTodo', todo);
+    todosApi.completeTodo(todo, todo.id);
+  },
+  addTodo({ commit }, todo) {
+    todosApi.addTodo(todo).then(commit('addTodo', todo));
+  },
 };
 
 const mutations = {

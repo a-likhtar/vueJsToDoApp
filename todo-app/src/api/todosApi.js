@@ -8,4 +8,18 @@ export default {
       console.log(e.statusText);
     });
   },
+  deleteTodo(id) {
+    return axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+          .catch(e => console.log(e));
+  },
+  completeTodo(todo, id) {
+    return axios.put(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+      body: todo,
+    }).catch(e => console.log(e));
+  },
+  addTodo(todo) {
+    return axios.post('https://jsonplaceholder.typicode.com/todos', {
+      body: todo,
+    }).catch(e => console.log(e));
+  },
 };

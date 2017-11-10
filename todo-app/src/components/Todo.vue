@@ -43,7 +43,7 @@
 </template>
 
 <script type="text/javascript">
-  import { mapGetters, mapActions } from 'vuex';
+  import { mapActions } from 'vuex';
 
   export default {
     props: ['todo'],
