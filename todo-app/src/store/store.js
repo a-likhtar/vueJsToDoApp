@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import todosApi from '../api/todosApi';
+import urls from './utils/urls';
 
 Vue.use(Vuex);
 
@@ -16,19 +17,19 @@ const getters = {
 
 const actions = {
   getAllTodos({ commit }) {
-    todosApi.getTodos().then((data) => commit('getAllTodos', data));
+    todosApi.todos(urls.getUrl().url).getAll().then((data) => commit('getAllTodos', data));
   },
   showForm: ({ commit }, isEditing) => commit('showForm', isEditing),
   hideForm: ({ commit }, isEditing) => commit('hideForm', isEditing),
   deleteTodo({ commit }, todo) {
-    todosApi.deleteTodo(todo.id).then(commit('deleteTodo', todo));
+    todosApi.todos(urls.getUrl().url).deleteTodo(todo.id).then(commit('deleteTodo', todo));
   },
   completeTodo({ commit }, todo) {
     commit('completeTodo', todo);
-    todosApi.completeTodo(todo, todo.id);
+    todosApi.todos(urls.getUrl().url).completeTodo(todo);
   },
   addTodo({ commit }, todo) {
-    todosApi.addTodo(todo).then(commit('addTodo', todo));
+    todosApi.todos(urls.getUrl().url).addTodo(todo).then(commit('addTodo', todo));
   },
 };
 
