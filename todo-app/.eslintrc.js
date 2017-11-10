@@ -40,6 +40,7 @@ module.exports = {
     'no-console':"warn",
     'no-unused-vars':"warn",
     'no-param-reassign':"warn",
-    'no-shadow':"warn"
+    'no-shadow':"warn",
+    'no-return-assign':"warn"
   }
 }

@@ -19,17 +19,17 @@ const actions = {
   getAllTodos({ commit }) {
     todosApi.todos(urls.getUrl().url).getAll().then((data) => commit('getAllTodos', data));
   },
-  showForm: ({ commit }, isEditing) => commit('showForm', isEditing),
-  hideForm: ({ commit }, isEditing) => commit('hideForm', isEditing),
   deleteTodo({ commit }, todo) {
     todosApi.todos(urls.getUrl().url).deleteTodo(todo.id).then(commit('deleteTodo', todo));
   },
   completeTodo({ commit }, todo) {
-    commit('completeTodo', todo);
-    todosApi.todos(urls.getUrl().url).completeTodo(todo);
+    todosApi.todos(urls.getUrl().url).updateTodo(todo).then(commit('updateTodo', todo));
   },
   addTodo({ commit }, todo) {
     todosApi.todos(urls.getUrl().url).addTodo(todo).then(commit('addTodo', todo));
+  },
+  updateTodo({ commit }, todo) {
+    todosApi.todos(urls.getUrl().url).updateTodo(todo).then(commit('updateTodo', todo));
   },
 };
 
@@ -37,18 +37,13 @@ const mutations = {
   getAllTodos(state, todos) {
     state.todos = todos;
   },
-  showForm(state, isEditing) {
-    isEditing = true;
-  },
-  hideForm(state, isEditing) {
-    isEditing = false;
-  },
   deleteTodo(state, todo) {
     const todoIndex = state.todos.indexOf(todo);
     state.todos.splice(todoIndex, 1);
   },
-  completeTodo(state, todo) {
-    todo.completed = true;
+  updateTodo(state, todo) {
+    let newTodo = state.todos.find(item => item.id = todo.id);
+    newTodo = todo;
   },
   addTodo(state, todo) {
     state.todos.push(todo);

@@ -51,12 +51,13 @@
       return { isEditing: false };
     },
     methods: {
-      ...mapActions(['deleteTodo', 'completeTodo']),
+      ...mapActions(['deleteTodo', 'updateTodo', 'completeTodo']),
       showForm() {
         this.isEditing = true;
       },
       hideForm() {
         this.isEditing = false;
+        this.updateTodo({ id: this.todo.id, title: this.todo.title });
       },
     },
   };
