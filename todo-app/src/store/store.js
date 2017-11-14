@@ -42,7 +42,7 @@ const mutations = {
     state.todos.splice(todoIndex, 1);
   },
   updateTodo(state, todo) {
-    let newTodo = state.todos.find(item => item.id = todo.id);
+    let newTodo = state.todos.find(item => item.id === todo.id);
     newTodo = todo;
   },
   addTodo(state, todo) {

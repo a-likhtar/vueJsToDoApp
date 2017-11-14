@@ -1,7 +1,7 @@
 export default {
   getUrl() {
     return {
-      url: 'https://jsonplaceholder.typicode.com/todos',
+      url: 'http://localhost:49786/api/Todoes',
     };
   },
 };
