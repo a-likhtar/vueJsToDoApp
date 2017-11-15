@@ -27,7 +27,7 @@ const actions = {
     todosApi.todos(urls.getUrl().url).updateTodo(todo).then(commit('updateTodo', todo));
   },
   addTodo({ commit }, todo) {
-    todosApi.todos(urls.getUrl().url).addTodo(todo).then(commit('addTodo', todo));
+    todosApi.todos(urls.getUrl().url).addTodo(todo).then((todo) => commit('addTodo', todo));
   },
   updateTodo({ commit }, todo) {
     todosApi.todos(urls.getUrl().url).updateTodo(todo).then(commit('updateTodo', todo));
