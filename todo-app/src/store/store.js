@@ -23,6 +23,7 @@ const actions = {
     todosApi.todos(urls.getUrl().url).deleteTodo(todo.id).then(commit('deleteTodo', todo));
   },
   completeTodo({ commit }, todo) {
+    todo.completed = true;
     todosApi.todos(urls.getUrl().url).updateTodo(todo).then(commit('updateTodo', todo));
   },
   addTodo({ commit }, todo) {
@@ -42,8 +43,11 @@ const mutations = {
     state.todos.splice(todoIndex, 1);
   },
   updateTodo(state, todo) {
-    let newTodo = state.todos.find(item => item.id === todo.id);
-    newTodo = todo;
+    const newTodo = state.todos.find(item => item.id === todo.id);
+    newTodo.userId = todo.userId;
+    newTodo.title = todo.title;
+    newTodo.project = todo.project;
+    newTodo.completed = todo.completed;
   },
   addTodo(state, todo) {
     state.todos.push(todo);

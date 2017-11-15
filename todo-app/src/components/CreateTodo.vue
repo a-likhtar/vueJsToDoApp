@@ -7,12 +7,12 @@
       <div class='content'>
         <div class='ui form'>
           <div class='field'>
-            <label>Id</label>
-            <input v-model="idText" type='text' ref='title' defaultValue="">
+            <label>Title</label>
+            <input v-model="titleText" type='text' ref='title' defaultValue="">
           </div>
           <div class='field'>
-            <label>Title</label>
-            <input v-model="titleText" type='text' ref='project' defaultValue="">
+            <label>Project</label>
+            <input v-model="projectText" type='text' ref='project' defaultValue="">
           </div>
           <div class='ui two button attached buttons'>
             <button class='ui basic blue button' v-on:click="sendForm">
@@ -33,8 +33,8 @@
 export default {
   data() {
     return {
-      idText: '',
       titleText: '',
+      projectText: '',
       isCreating: false,
     };
   },
@@ -46,9 +46,15 @@ export default {
       this.isCreating = false;
     },
     sendForm() {
-      this.$store.dispatch('addTodo', { id: this.idText, title: this.titleText });
-      this.idText = '';
+      this.$store.dispatch('addTodo',
+        {
+          userId: 0,
+          title: this.titleText,
+          project: this.projectText,
+          completed: false,
+        });
       this.titleText = '';
+      this.projectText = '';
       this.isCreating = false;
     },
   },
